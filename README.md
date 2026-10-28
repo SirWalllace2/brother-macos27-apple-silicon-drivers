@@ -29,7 +29,7 @@ Getestetes System: macOS 27.0.1 auf Apple Silicon. **Kein Nachweis für Intel-Ma
 
 Bei QL-Druckern müssen Dokument-/Papierformat und Rollentyp zur eingelegten Rolle passen. 62-mm-Endlosrolle: z. B. 62 × 40/100/150 mm, Rollentyp Endlosrolle. Für vorgestanzte Etiketten genaue Größe und Einzeletiketten wählen. Eigene Längen sind möglich. Automatischer Schnitt ist abschaltbar. Rollentyp und Dokumentformat werden nicht automatisch vom Sensor übernommen.
 
-Pages und andere Programme können über den normalen macOS-Druckdialog drucken. Der vollständige macOS-PDF-Druckweg wurde getestet; ein manuell bedienter Pages-Test wurde nicht protokolliert.
+Pages und andere Programme können über den normalen macOS-Druckdialog drucken. Der vollständige macOS-PDF-Druckweg wurde getestet. Auch ein manuell durchgeführter Druck aus **Apple Pages** wurde vom Nutzer als erfolgreich bestätigt.
 
 ## macOS-Sicherheitsmeldung
 

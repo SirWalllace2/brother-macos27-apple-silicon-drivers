@@ -5,6 +5,7 @@ Hardwarebestätigungen aus der Entwicklung am 27./28. Oktober 2026, macOS 27.0.1
 - DCP-7055: USB-Druck mit Text, Linien, Graustufen; tatsächlichen Ausdruck bestätigt.
 - DCP-7055: wiederholte Scans, volle bedruckte Vorlage bis zur unteren Legende; Farbe 300/600 dpi, Grau 200/600 dpi. PNG-Pixel und DPI-Metadaten geprüft.
 - QL-720NW und QL-700: separate USB-Warteschlangen, 62 × 40 mm auf 62-mm-Endlosrolle. Text, Rahmen, Orientierung und Schnitt bestätigt.
+- Apple Pages: Ein manuell durchgeführter Druck wurde vom Nutzer am 28. Oktober 2026 als erfolgreich bestätigt.
 - QL-Kopien: zwei Kopien im erzeugten Druckstrom geprüft; kein separater physischer Mehrkopientest.
 - Scannerdecoder: 65 synthetische Integrationsprüfungen, JPEG-Decodertest und eigener Regressionstest der DCP-7055-Seitenende-Metadaten bestanden.
 - brlaser: vier mitgelieferte Testgruppen bestanden.
