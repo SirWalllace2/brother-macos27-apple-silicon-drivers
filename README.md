@@ -1,6 +1,16 @@
-# Brother Legacy macOS
+# Brother-Treiber für macOS 27 und Apple Silicon
 
-Experimentelle native Apple-Silicon-Treiber für ältere Brother-Drucker und eine eigenständige DCP-7055-Scan-App. **macOS 27, Apple Silicon, USB.** Kostenloses Community-Projekt, ohne Verbindung zu oder Unterstützung durch Brother.
+Native USB-Druckertreiber für **Brother DCP-7055, QL-700 und QL-720NW** sowie eine eigenständige **DCP-7055-Scan-App** für Apple Silicon. **macOS 27, Apple Silicon, USB.** Kostenloses Community-Projekt, ohne Verbindung zu oder Unterstützung durch Brother.
+
+## Treiber direkt herunterladen
+
+### [⬇ DCP-7055: Drucker + Scanner herunterladen (.pkg)](https://github.com/SirWalllace2/brother-macos27-apple-silicon-drivers/releases/download/v0.1.0/Brother-DCP-7055-macOS27-arm64.pkg)
+
+### [⬇ QL-700 / QL-720NW: Druckertreiber herunterladen (.pkg)](https://github.com/SirWalllace2/brother-macos27-apple-silicon-drivers/releases/download/v0.1.0/Brother-QL-700-720NW-macOS27-arm64.pkg)
+
+**Voraussetzungen:** Apple-Silicon-Mac, macOS 27 und USB-Anschluss. Experimentelle Vorabversion; Installer nicht Developer-ID-signiert und nicht notarisiert. [Installationshinweise](#installation) · [macOS-Sicherheitsmeldung](#macos-sicherheitsmeldung)
+
+[Alle Downloads, Quellcode und Prüfsummen](https://github.com/SirWalllace2/brother-macos27-apple-silicon-drivers/releases/tag/v0.1.0)
 
 ## Vibe-Coding-Hinweis 🤖
 
@@ -8,9 +18,7 @@ Dieses Projekt wurde mit Unterstützung von **OpenAI Codex „vibegecodet“**. 
 
 Die folgenden Hardwaretests wurden an echten Geräten durchgeführt und die Ergebnisse vom Nutzer bestätigt. Das ist **keine umfassende Qualitäts- oder Sicherheitsprüfung**. Experimentelle Software, ohne Gewährleistung; Nutzung auf eigene Verantwortung.
 
-## Downloads
-
-Installationspakete und vollständige Quellarchive: **[GitHub Releases](https://github.com/SirWalllace2/brother-legacy-macos/releases)**. Die Releases sind als Vorabversionen gekennzeichnet. Ein Download ersetzt keinen Test auf deinem Mac.
+## Getestete Druckermodelle
 
 | Modell | Drucken | Scannen | Bestätigter Test |
 |---|---|---|---|
