@@ -12,6 +12,12 @@ Native USB-Druckertreiber für **Brother DCP-7055, QL-700 und QL-720NW** sowie e
 
 [Alle Downloads, Quellcode und Prüfsummen](https://github.com/SirWalllace2/brother-macos27-apple-silicon-drivers/releases/tag/v0.1.0)
 
+## Mit deinem KI-Agenten selbst bauen
+
+Du möchtest den Code auf deinem eigenen Mac prüfen, bauen und installieren lassen? **[Hier ist ein fertiger Prompt zum Kopieren](docs/AGENT-PROMPT.md)** für deinen lokalen Coding-Agenten.
+
+Er führt durch Codeprüfung, lokalen Build, Tests und Paketkontrolle. Erst danach fragt er nach deiner Zustimmung zur Installation. **Auch eine KI-Sicherheitsprüfung ist keine Sicherheitsgarantie.**
+
 ## Vibe-Coding-Hinweis 🤖
 
 Dieses Projekt wurde mit Unterstützung von **OpenAI Codex „vibegecodet“**. KI hat wesentliche Teile der Anpassungen, der Scan-App und der Installationspakete erstellt. Die Treiber bauen auf bestehenden freien Projekten auf; deren Urheber und Lizenzen sind in [UPSTREAM.md](UPSTREAM.md) genannt.

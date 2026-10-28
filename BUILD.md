@@ -1,5 +1,7 @@
 # Aus Quellcode bauen
 
+Für die begleitete Einrichtung mit einem lokalen KI-Agenten: [Agent-Prompt zum Kopieren](docs/AGENT-PROMPT.md). Er verlangt eine Prüfung vor Ausführung und eine eigene Freigabe vor der Systeminstallation.
+
 Voraussetzungen: Apple Silicon, macOS 27, Xcode Command Line Tools (`xcode-select --install`) und Python 3. Zum Bauen zusätzlich Homebrew-Pakete `cmake`, `libusb-compat` und `jpeg-turbo` installieren. Auf Zielgeräten sind diese Pakete nicht nötig.
 
 ```sh
