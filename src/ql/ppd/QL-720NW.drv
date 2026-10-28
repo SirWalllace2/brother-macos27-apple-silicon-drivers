@@ -1,0 +1,32 @@
+#include <font.defs>
+{
+ Manufacturer "Brother"
+ ModelName "QL-720NW"
+ Attribute "NickName" "" "Brother QL-720NW, Apple Silicon"
+ PCFileName "ql720arm.ppd"
+ Version "0.1"
+ Attribute "Product" "" "(Brother QL-720NW)"
+ Attribute "1284DeviceID" "" "MFG:Brother;MDL:QL-720NW;CMD:PT-CBP;CLS:PRINTER;"
+ Attribute "cupsManualCopies" "" "True"
+ Filter application/vnd.cups-raster 0 /Library/Printers/QL720/Filter/rastertoql720
+ ColorDevice No
+ Throughput 30
+ Font *
+ Resolution k 1 0 0 0 "300dpi/300 DPI"
+ HWMargins 4.25 8.5 4.25 8.5
+ VariablePaperSize Yes
+ MinSize 34 34
+ MaxSize 176 2834
+ CustomMedia "DK62x40/62 x 40 mm (Endlosrolle)" 175.748 113.386 4.25 8.5 4.25 8.5 "<</PageSize[175.748 113.386]/ImagingBBox null>>setpagedevice" ""
+ *CustomMedia "DK62x100/62 x 100 mm (Endlosrolle)" 175.748 283.465 4.25 8.5 4.25 8.5 "<</PageSize[175.748 283.465]/ImagingBBox null>>setpagedevice" ""
+ CustomMedia "DK62x150/62 x 150 mm (Endlosrolle)" 175.748 425.197 4.25 8.5 4.25 8.5 "<</PageSize[175.748 425.197]/ImagingBBox null>>setpagedevice" ""
+ CustomMedia "DK29x90/29 x 90 mm (Einzeletikett)" 82.205 255.118 4.25 8.5 4.25 8.5 "<</PageSize[82.205 255.118]/ImagingBBox null>>setpagedevice" ""
+ CustomMedia "DK62x29/62 x 29 mm (Einzeletikett)" 175.748 82.205 4.25 8.5 4.25 8.5 "<</PageSize[175.748 82.205]/ImagingBBox null>>setpagedevice" ""
+ CustomMedia "DK62x100Label/62 x 100 mm (Einzeletikett)" 175.748 283.465 4.25 8.5 4.25 8.5 "<</PageSize[175.748 283.465]/ImagingBBox null>>setpagedevice" ""
+ Option "MediaType/Rollentyp" PickOne AnySetup 10
+ *Choice "Tape/Endlosrolle" "<</MediaType(Tape)>>setpagedevice"
+ Choice "Labels/Einzeletiketten" "<</MediaType(Labels)>>setpagedevice"
+ Option "AutoCut/Automatisch schneiden" Boolean AnySetup 10
+ *Choice "True/Ein" ""
+ Choice "False/Aus" ""
+}
