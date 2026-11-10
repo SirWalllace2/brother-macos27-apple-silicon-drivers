@@ -4,13 +4,13 @@ Native USB-Druckertreiber für **Brother DCP-7055, QL-700 und QL-720NW** sowie e
 
 ## Treiber direkt herunterladen
 
-### [⬇ DCP-7055: Drucker + Scanner herunterladen (.pkg)](https://github.com/SirWalllace2/brother-macos27-apple-silicon-drivers/releases/download/v0.1.0/Brother-DCP-7055-macOS27-arm64.pkg)
+### [⬇ DCP-7055: Drucker + Scanner herunterladen (.pkg)](https://github.com/SirWalllace2/brother-macos27-apple-silicon-drivers/releases/download/v0.1.1/Brother-DCP-7055-macOS27-arm64.pkg)
 
-### [⬇ QL-700 / QL-720NW: Druckertreiber herunterladen (.pkg)](https://github.com/SirWalllace2/brother-macos27-apple-silicon-drivers/releases/download/v0.1.0/Brother-QL-700-720NW-macOS27-arm64.pkg)
+### [⬇ QL-700 / QL-720NW: Druckertreiber herunterladen (.pkg)](https://github.com/SirWalllace2/brother-macos27-apple-silicon-drivers/releases/download/v0.1.1/Brother-QL-700-720NW-macOS27-arm64.pkg)
 
 **Voraussetzungen:** Apple-Silicon-Mac, macOS 27 und USB-Anschluss. Experimentelle Vorabversion; Installer nicht Developer-ID-signiert und nicht notarisiert. [Installationshinweise](#installation) · [macOS-Sicherheitsmeldung](#macos-sicherheitsmeldung)
 
-[Alle Downloads, Quellcode und Prüfsummen](https://github.com/SirWalllace2/brother-macos27-apple-silicon-drivers/releases/tag/v0.1.0)
+[Alle Downloads, Quellcode und Prüfsummen](https://github.com/SirWalllace2/brother-macos27-apple-silicon-drivers/releases/tag/v0.1.1)
 
 ## Mit deinem KI-Agenten selbst bauen
 
@@ -32,7 +32,9 @@ Die folgenden Hardwaretests wurden an echten Geräten durchgeführt und die Erge
 | QL-700 | nativer CUPS-Treiber | entfällt | USB, 62-mm-Endlosrolle, Text/Rahmen, Schnitt |
 | QL-720NW | nativer CUPS-Treiber | entfällt | USB, 62-mm-Endlosrolle, Text/Rahmen, Schnitt |
 
-Getestetes System: macOS 27.0.1 auf Apple Silicon. **Kein Nachweis für Intel-Macs, Windows, ältere macOS-Versionen, andere Modelle oder Netzwerkbetrieb.** Andere Rollen und die Zwischenauflösungen sind auswählbar, aber nicht alle Kombinationen wurden am Gerät getestet.
+Getestet unter macOS 27.0.1 auf Apple Silicon. Mit dem DCP-7055 wurde auch aus **Windows 11 über die Mac-Druckerfreigabe von Parallels Desktop 26.4** eine lesbare Seite gedruckt. Release v0.1.1 enthält die korrigierte Druckerkomponente 6.2.8.3. [Einrichtung für Parallels und Update bestehender Warteschlangen](docs/INSTALL.md#dcp-7055-mit-parallels-und-windows-11)
+
+Tests auf Intel-Macs, mit direkt an Windows angeschlossenen Druckern, älteren macOS-Versionen, anderen Modellen und im Netzwerkbetrieb stehen aus. Andere Rollen und die Zwischenauflösungen sind auswählbar, einzelne Kombinationen wurden am Gerät getestet.
 
 ## Installation
 

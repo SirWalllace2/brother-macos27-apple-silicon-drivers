@@ -9,7 +9,7 @@ brew install cmake libusb-compat jpeg-turbo
 python3 scripts/build.py
 ```
 
-Das Skript schreibt nur nach `build/` und `dist/`, fragt keine Drucker ab, startet keine Scans und installiert nichts ins System. Es baut die öffentlichen Quellen, führt Decoder-/Metadaten-/JPEG- und brlaser-Tests aus und erzeugt zwei Installer. App und Filter werden lokal ad-hoc signiert. Ein Apple-Developer-Konto wird nicht benötigt.
+Das Skript baut die Treiber unter `build/`, führt die Decoder-, Metadaten-, JPEG- und brlaser-Tests aus und legt beide Installer unter `dist/` ab. Zur Paketprüfung entpackt es den DCP-Installer in einen temporären Ordner und prüft das Ausführungsrecht des Druckfilters und den an Parallels gemeldeten Modellnamen. Der Build läuft ohne angeschlossenen Drucker und ohne Systeminstallation. App und Filter werden lokal ad-hoc signiert. Ein Apple-Developer-Konto wird nicht benötigt.
 
 Die veröffentlichten Builds wurden mit libusb 1.0.30, libusb-compat 0.1.9 und libjpeg-turbo 3.2.0 gebaut. Deren Lizenztexte und Homebrew-Rezepte stehen in `licenses/`; Original-Quellarchive sind als Release-Download enthalten. Homebrew kann zukünftig andere Versionen liefern: Dann ist eine erneute Kompatibilitätsprüfung erforderlich. Die macOS-SDK-Version kann ebenfalls das Ergebnis verändern; bytegleiche Builds werden nicht zugesichert.
 

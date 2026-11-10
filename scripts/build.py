@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build local, unsigned macOS 27/arm64 installers from the published sources."""
 from pathlib import Path
-import hashlib, os, platform, plistlib, re, shutil, subprocess
+import hashlib, os, platform, plistlib, re, shutil, stat, subprocess, tempfile
 ROOT=Path(__file__).resolve().parents[1]
 BUILD=Path(os.environ.get('BROTHER_BUILD_DIR',str(ROOT/'build'))).resolve(); DIST=ROOT/'dist'
 def run(*args):
@@ -70,9 +70,16 @@ flags=f'-Wno-int-conversion -Wno-incompatible-pointer-types -Wno-implicit-functi
 run('cmake','-S',ROOT/'vendor/brlaser','-B',BUILD/'brlaser','-DCMAKE_BUILD_TYPE=Release','-DCMAKE_OSX_ARCHITECTURES=arm64','-DCMAKE_OSX_DEPLOYMENT_TARGET=27.0',f'-DCMAKE_CXX_FLAGS=-ffile-prefix-map="{ROOT}=."')
 run('cmake','--build',BUILD/'brlaser','-j','4');run('ctest','--test-dir',BUILD/'brlaser','--output-on-failure')
 pr=BUILD/'printer-root';flt=pr/'Library/Printers/brlaser/Filter/rastertobrlaser'
-copy(BUILD/'brlaser/rastertobrlaser',flt);sign(flt)
-ppd=(BUILD/'brlaser/ppd/br7055.ppd').read_text();ppd=re.sub(r'^\*NickName:.*$', '*NickName: "Brother DCP-7055, brlaser 6.2.8 Apple Silicon"',ppd,flags=re.M);ppd='\n'.join(l for l in ppd.splitlines() if not l.startswith('*APICADriver:'))+'\n'
-p=pr/'Library/Printers/PPDs/Contents/Resources/Brother-DCP-7055-brlaser-arm64.ppd';p.parent.mkdir(parents=True,exist_ok=True);p.write_text(ppd)
+copy(BUILD/'brlaser/rastertobrlaser',flt)
+flt.chmod(0o755)
+sign(flt)
+ppd=(BUILD/'brlaser/ppd/br7055.ppd').read_text()
+# Windows shared printing through Parallels uses this as the printer name.
+ppd=re.sub(r'^\*NickName:.*$', '*NickName: "Brother DCP-7055 brlaser 6.2.8 Apple Silicon"',ppd,flags=re.M)
+ppd='\n'.join(l for l in ppd.splitlines() if not l.startswith('*APICADriver:'))+'\n'
+dcp_ppd=pr/'Library/Printers/PPDs/Contents/Resources/Brother-DCP-7055-brlaser-arm64.ppd'
+dcp_ppd.parent.mkdir(parents=True,exist_ok=True)
+dcp_ppd.write_text(ppd)
 copy(ROOT/'vendor/brlaser/COPYING',pr/'Library/Printers/brlaser/Documentation/COPYING.txt')
 # QL printing
 qr=BUILD/'ql-root';qf=qr/'Library/Printers/QL720/Filter/rastertoql720';qf.parent.mkdir(parents=True,exist_ok=True)
@@ -110,11 +117,22 @@ run(BUILD/'decoder-tests',lib/'libbrscandec.1.dylib',lib/'libbrcolm.1.dylib',ROO
 run('clang','-I',ROOT/'vendor/brscan/libsane-brother',ROOT/'src/scanner/test-scanner-metadata.c',ROOT/'vendor/brscan/libsane-brother/brother_brscan4.c','-o',BUILD/'metadata-tests');run(BUILD/'metadata-tests')
 run('clang','-I',ROOT/'vendor/brscan/include','-I',ROOT/'vendor/brscan/libsane-brother','-I','/opt/homebrew/opt/libusb-compat/include','-I','/opt/homebrew/include',ROOT/'tests/test_color_jpeg.c','-L',BUILD/'scanner','-lsane-brother',f'-Wl,-rpath,{BUILD}/scanner','-L','/opt/homebrew/lib','-ljpeg','-o',BUILD/'jpeg-tests');run(BUILD/'jpeg-tests')
 # Validate PPD syntax, then package with root-owned files and non-relocatable app.
-run('cupstestppd','-I','filters',pr/'Library/Printers/PPDs/Contents/Resources/Brother-DCP-7055-brlaser-arm64.ppd')
-pkg(pr,'org.local.brlaser.dcp7055.arm64','6.2.8.2',BUILD/'packages/Printer.pkg')
+run('cupstestppd','-I','filters',dcp_ppd)
+printer_version = '6.2.8.3'
+pkg(pr,'org.local.brlaser.dcp7055.arm64',printer_version,BUILD/'packages/Printer.pkg')
 pkg(BUILD/'scanner-root','org.local.dcp7055.scan','0.3.0',BUILD/'packages/Scanner.pkg',True)
 pkg(qr,'org.local.brother.ql720.arm64','0.3.0',BUILD/'packages/QL.pkg')
-product('Brother DCP-7055 – Drucken und Scannen',[('org.local.brlaser.dcp7055.arm64','6.2.8.2','Printer.pkg'),('org.local.dcp7055.scan','0.3.0','Scanner.pkg')],DIST/'Brother-DCP-7055-macOS27-arm64.pkg')
+dcp_installer = DIST/'Brother-DCP-7055-macOS27-arm64.pkg'
+product('Brother DCP-7055 – Drucken und Scannen',[('org.local.brlaser.dcp7055.arm64',printer_version,'Printer.pkg'),('org.local.dcp7055.scan','0.3.0','Scanner.pkg')],dcp_installer)
+with tempfile.TemporaryDirectory() as tmp:
+ expanded = Path(tmp)/'expanded'
+ run('pkgutil','--expand-full',dcp_installer,expanded)
+ packaged_filter = expanded/'Printer.pkg'/'Payload'/flt.relative_to(pr)
+ if stat.S_IMODE(packaged_filter.stat().st_mode) != 0o755:
+  raise RuntimeError('The packaged DCP-7055 filter must have mode 0755.')
+ packaged_ppd = expanded/'Printer.pkg'/'Payload'/dcp_ppd.relative_to(pr)
+ if not re.search(r'^\*NickName: "[^",\n]+"$', packaged_ppd.read_text(), re.M):
+  raise RuntimeError('The packaged DCP-7055 PPD needs a printer name without commas for Parallels.')
 product('Brother QL-700 und QL-720NW',[('org.local.brother.ql720.arm64','0.3.0','QL.pkg')],DIST/'Brother-QL-700-720NW-macOS27-arm64.pkg')
 (DIST/'SHA256SUMS.txt').write_text(''.join(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.name+'\n' for p in sorted(DIST.glob('*.pkg'))))
 print('Built installers in',DIST)
